@@ -37,7 +37,8 @@ def seat_cancellation(reserved_seat):
         yn = input('해당 좌석은 예약되어있지 않습니다. 예약을 원하십니까? (y/n): ')
         yn = yn.lower()
         if yn == 'y':
-            seat_booking()
+            seat_booking(reserved_seat)
+        
 
         
 

@@ -30,18 +30,30 @@ reserved_seat = []  # 예매 완료된 좌석
 while True:
 
     try:
-        input_num = int(input("영화관 좌석 예매 시스템에 오신 것을 환영합니다 ! \n 1. 좌석 예매 \n 2. 좌석 취소 \n 3.프로그램 종료 \n "))
+        input_num = int(input("\n 영화관 좌석 예매 시스템에 오신 것을 환영합니다 ! \n 1. 좌석 예매 \n 2. 좌석 취소 \n 3. 좌석현황 \n 4. 프로그램 종료  \n >>  "))
 
         match input_num :
             case 1:
-                seat_booking() # 좌석 예매
+                seat_booking(reserved_seat) # 좌석 예매
+                
             case 2:
-                seat_cancellation() #좌석 예매 취소
+                seat_cancellation(reserved_seat) #좌석 예매 취소
+                
             case 3:
+                seat_check(seats, reserved_seat)
+
+            case 4:
                 print("프로그램을 종료합니다 ! ") 
                 break
             case _:
                 print("숫자는 1~3만 입력 가능합니다. ")
+                continue
+
+        question = input("계속 진행하겠습니까? (y/n): ").lower()
+
+        if question != 'y':
+            print("프로그램을 종료합니다 !")
+            break  
 
     except ValueError:
         print("숫자만 입력 가능합니다. ")
