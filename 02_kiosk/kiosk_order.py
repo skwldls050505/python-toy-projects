@@ -14,7 +14,7 @@ class Order:
                 print (f'{i["name"]} :  {i["price"]}  x  {i["cnt"]} = {i["price"] * i["cnt"]}\n')
                 total += i["price"] * i["cnt"]
             print("=================== \n")
-            print("장바구니 total : " + total)
+            print(f'장바구니 총 금액: {total}')
 
             
 
@@ -23,6 +23,7 @@ class Order:
 
         add_menu = {"name": menu_name, "price": menu_price, "cnt": menu_cnt}
         self.cart.append(add_menu)
+        return "추가 완료"
 
         
 
@@ -30,14 +31,21 @@ class Order:
     def payment(self): # 총 금액 계산 + 결제
         total = 0
         if not self.cart:
-            print("장바구니가 비워져있어요 . . :( ")
-            empty_chk = input("1 : 계속 담기 \n 2 : 종료")
-            match empty_chk:
-                case 1:
-                    self.add_cart()
-                case 2:
-                    return 
-
+            print("장바구니가 비워져있어요 . . :( \n")
+            while True:
+                try:
+                    payment_chk = int(input("1. 종료 \n 2. 계속 담기 \n"))
+                    match payment_chk:
+                        case 1:
+                            return "종료" # 종료
+                        case 2:
+                            return 1 # 계속 담기
+                        case _:
+                            print("1 ~ 2만 입력하세요 !! ")
+                except ValueError:
+                    print("1 ~ 2 만 입력하세요 !! ")
+                    continue
+                
         
         for i in self.cart:
                 total += i["price"] * i["cnt"]
@@ -50,17 +58,18 @@ class Order:
             if yn.lower() == 'y':
                 print("결제 완료 ! 키오스크 종료됩니다 <3 ")
                 self.cart =[]
-                return True
+                return "결제 완료"
             else:
-                chk = input("다시 장바구니 담기: 1 \n 결제 계속 진행: 2 \n 결제 취소: 3 \n >> ")
-                match chk:
-                    case 1:
-                        self.add_cart()
-                    case 2:
-                        continue
-                    case 3:
-                        break
-                
-
-
-        
+                try:
+                    chk = int(input("다시 장바구니 담기: 1 \n 결제 계속 진행: 2 \n 결제 취소: 3 \n >> "))
+                    match chk:
+                        case "장바구니":
+                            return 1 # 다시 장바구니 담기
+                        case 2:
+                            continue
+                        case 3:
+                            return 0 # 결제 취소
+                        case _:
+                            print("1 ~ 3만 입력하세요 !!")
+                except ValueError:
+                    print("1 ~ 3 만 입력하세요 !!")

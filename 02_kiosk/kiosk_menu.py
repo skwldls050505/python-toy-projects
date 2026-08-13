@@ -36,6 +36,7 @@ class Menu:
                         self.basic_menu[new_menu] = int(new_menu_price)
 
                 print('신메뉴 등록 완료 🥄')
+                print('\n\n')
 
 
         except FileNotFoundError :
