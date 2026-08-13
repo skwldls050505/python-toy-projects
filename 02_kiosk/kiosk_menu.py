@@ -17,10 +17,14 @@ class Menu:
 
 
     def show_menu(self): # 메뉴 출력 함수
-        print('==== 메뉴판 =======')
-        for i in self.basic_menu:
-            print(f'{i} : {self.basic_menu[i]}원')
-        print('=================')
+        print()
+        print("╔════════════════════════════════════╗")
+        print("║          ☕ CAFE MENU ☕           ║")
+        print("╠════════════════════════════════════╣")
+        for name, price in self.basic_menu.items():
+            print(f'{name: <16}  {price:>6,}원')
+        print("╚════════════════════════════════════╝")
+        print()
 
 
 
