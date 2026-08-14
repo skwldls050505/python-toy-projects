@@ -5,14 +5,17 @@ class Order:
 
 
     def show_cart(self): # 장바구니 출력
+        total = 0
         print("\n ╔═══════ MY 장바구니 ═══════╗ \n")
         if not self.cart :
             print("장바구니 텅텅 ~ :( \n")
         else:
-            total = 0
+            
             for i in self.cart:
                 print (f'{i["name"]} :  {i["price"]}  x  {i["cnt"]} = {i["price"] * i["cnt"]}\n')
                 total += i["price"] * i["cnt"]
+                if total == 0 :
+                    self.cart = []
             
             print(f'TOTAL 금액: {total}')
             print(" ╚═══════════════════════════╝ \n")
